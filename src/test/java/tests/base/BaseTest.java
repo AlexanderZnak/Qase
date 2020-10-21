@@ -12,8 +12,8 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 @Listeners(TestListener.class)
 public class BaseTest {
-    public static final String EMAIL = "frolovruslan1990@gmail.com";
-    public static final String PASSWORD = "123guki1303";
+    public static final String EMAIL = System.getProperty("email");
+    public static final String PASSWORD = System.getProperty("password");
     public LoginSteps loginSteps;
     public ProjectsSteps projectsSteps;
     public RepositorySteps repositorySteps;
