@@ -16,7 +16,7 @@ public class RepositoryTest extends BaseTest {
                 .severity("Major")
                 .priority("High")
                 .type("Smoke")
-                .milestone("Select...")
+                //.milestone("Select...") //TODO preconditions required
                 .behavior("Positive")
                 .automationStatus("Automated")
                 .preConditions("Open page")

@@ -1,18 +1,15 @@
 package elements;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.SelenideElement;
 import lombok.extern.log4j.Log4j2;
-import org.openqa.selenium.Keys;
+import org.apache.commons.lang3.StringUtils;
 
-import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.Selenide.actions;
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
+import static com.codeborne.selenide.Selenide.*;
 
 @Log4j2
 public class Select {
-    String labelLocator = "//*[text()='%s']/following::div";
-    String optionLocator = "//*[text()='%s']/following::input";
+    String labelLocator = "//*[text()='%s']/parent::div//div[contains(@class, 'container')]";
+    String optionLocator = "//*[contains(@id, 'react-select') and contains(text(),'%s')]";
     String label;
 
     public Select(String label) {
@@ -21,10 +18,9 @@ public class Select {
 
     public void select(String option) {
         log.info(String.format("Selecting option: %s with label: %s", option, label));
-//        $x(String.format(labelLocator, label)).shouldBe(Condition.visible).click();
-//        $x(String.format(optionLocator, label)).shouldBe(Condition.visible).sendKeys(option);
-//        actions().sendKeys(Keys.ENTER).perform();
-        SelenideElement  element = $x(String.format(optionLocator, label));
-        actions().moveToElement(element).click(element).sendKeys(option).sendKeys(Keys.ENTER).perform();
+        if(StringUtils.isNotEmpty(option)) {
+            $x(String.format(labelLocator, label)).shouldBe(Condition.visible).click();
+            $x(String.format(optionLocator, option)).shouldBe(Condition.visible).click();
+        }
     }
 }

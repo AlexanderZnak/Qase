@@ -12,8 +12,8 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 @Listeners(TestListener.class)
 public class BaseTest {
-    public static final String EMAIL = System.getProperty("email");
-    public static final String PASSWORD = System.getProperty("password");
+    public static final String EMAIL = "frolovruslan1990@gmail.com";
+    public static final String PASSWORD = "123guki1303";
     public LoginSteps loginSteps;
     public ProjectsSteps projectsSteps;
     public RepositorySteps repositorySteps;
@@ -22,7 +22,7 @@ public class BaseTest {
     public void setUp() {
         Configuration.browser = "chrome";
         Configuration.timeout = 5000;
-        Configuration.clickViaJs = true;
+        //Configuration.clickViaJs = true; //TODO doesn't work with such click, so let's remove
         Configuration.startMaximized = true;
         Configuration.headless = true; //#configuration to run tests without browser
         loginSteps = new LoginSteps();

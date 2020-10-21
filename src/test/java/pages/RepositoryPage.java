@@ -28,6 +28,7 @@ public class RepositoryPage extends BasePage {
     }
 
     public boolean findTestCaseByName(String caseName) {
+        //TODO better wait here. Looks like list is not loading. Let's use JS wait here for readyState
         ElementsCollection cases = $$(CASE_NAME);
         log.info(String.format("Looking for test case: %s from list", caseName));
         boolean name = false;
