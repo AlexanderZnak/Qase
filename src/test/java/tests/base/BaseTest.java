@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import steps.LoginSteps;
 import steps.ProjectsSteps;
+import steps.RepositorySteps;
 
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
@@ -15,16 +16,18 @@ public class BaseTest {
     public static final String PASSWORD = System.getProperty("password");
     public LoginSteps loginSteps;
     public ProjectsSteps projectsSteps;
+    public RepositorySteps repositorySteps;
 
     @BeforeMethod
     public void setUp() {
         Configuration.browser = "chrome";
-        Configuration.timeout = 15000;
-        Configuration.clickViaJs = true;
+        Configuration.timeout = 5000;
+        //Configuration.clickViaJs = true; //TODO doesn't work with such click, so let's remove
         Configuration.startMaximized = true;
-//        Configuration.headless = true; //#configuration to run tests without browser
+        Configuration.headless = true; //#configuration to run tests without browser
         loginSteps = new LoginSteps();
         projectsSteps = new ProjectsSteps();
+        repositorySteps = new RepositorySteps();
     }
 
     @AfterMethod(alwaysRun = true)
