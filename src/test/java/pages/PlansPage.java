@@ -2,6 +2,7 @@ package pages;
 
 import com.codeborne.selenide.Condition;
 import elements.Input;
+import elements.InputTitle;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 
@@ -38,7 +39,7 @@ public class PlansPage extends BasePage {
 
     public AddCasesModal fillInTestPlanDetails(String planName, String planDescription) {
         log.info(String.format("Filling in test plan name: '%s', description: '%s' and adding test cases", planName, planDescription));
-        new Input("Title").write(planName);
+        new InputTitle("Title").write(planName);
         new Input(("Description")).write(planDescription);
         clickByXpathText(" Add cases");
         return new AddCasesModal();
@@ -55,7 +56,7 @@ public class PlansPage extends BasePage {
 
     public PlansPage clearInputFields() {
         log.info("Clearing test plan input fields");
-        new Input("Title").clear();
+        new InputTitle("Title").clear();
         new Input(("Description")).clear();
         return this;
     }

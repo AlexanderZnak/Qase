@@ -4,6 +4,7 @@ import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import elements.Input;
+import elements.InputTitle;
 import elements.Select;
 import lombok.extern.log4j.Log4j2;
 import models.TestRun;
@@ -38,8 +39,8 @@ public class RunsPage extends BasePage {
 
     public RunsPage fillInTestRun(TestRun testRun) {
         log.info(String.format("Filling in test run: '%s'", testRun));
-        new Input("Run title").clear();
-        new Input("Run title").write(testRun.getRunTitle());
+        new InputTitle("Run title").clear();
+        new InputTitle("Run title").write(testRun.getRunTitle());
         new Input("Description").write(testRun.getDescription());
         new Select("Plan").select(testRun.getPlan());
         new Select("Environment").select(testRun.getEnvironment());
@@ -62,14 +63,14 @@ public class RunsPage extends BasePage {
 
     public RunsPage clearTestRunInputFields(TestRun testRun) {
         log.info(String.format("Clearing input fields in test run: '%s'", testRun));
-        new Input("Run title").clear();
+        new InputTitle("Run title").clear();
         new Input("Description").clear();
         return this;
     }
 
     public RunsPage fillInEditingTestRun(TestRun testRun) {
         log.info(String.format("Filling in editing test run: '%s'", testRun));
-        new Input("Run title").write(testRun.getRunTitle());
+        new InputTitle("Run title").write(testRun.getRunTitle());
         new Input("Description").write(testRun.getDescription());
         new Select("Environment").select(testRun.getEnvironment());
         new Select("Milestone").select(testRun.getMilestone());

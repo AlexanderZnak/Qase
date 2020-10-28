@@ -21,10 +21,9 @@ public class BaseTest {
     @BeforeMethod
     public void setUp() {
         Configuration.browser = "chrome";
-        Configuration.timeout = 10000;
+        Configuration.timeout = 20000;
         Configuration.startMaximized = true;
         Configuration.pageLoadStrategy = "eager";
-        Configuration.headless = true; //#configuration to run tests without browser
         loginSteps = new LoginSteps();
         projectsSteps = new ProjectsSteps();
         repositorySteps = new RepositorySteps();

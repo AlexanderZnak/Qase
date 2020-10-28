@@ -1,6 +1,7 @@
 package steps;
 
 import elements.Input;
+import elements.InputTitle;
 import elements.Select;
 import lombok.extern.log4j.Log4j2;
 import models.TestRun;
@@ -44,7 +45,7 @@ public class RunsSteps {
                 .openPage()
                 .selectOption(expectedTestRun.getRunTitle(), "Edit run");
         TestRun actualTestRun = TestRun.builder()
-                .runTitle(new Input("Run title").getText())
+                .runTitle(new InputTitle("Run title").getText())
                 .description(new Input("Description").getText())
                 .environment(new Select("Environment").getText())
                 .milestone(new Select("Milestone").getText())
