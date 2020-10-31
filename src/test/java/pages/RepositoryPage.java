@@ -5,6 +5,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import elements.Input;
+import elements.InputTitle;
 import elements.Select;
 import lombok.extern.log4j.Log4j2;
 import models.TestCase;
@@ -58,7 +59,7 @@ public class RepositoryPage extends BasePage {
 
     public RepositoryPage fillInTestCase(TestCase testCase) {
         log.info(String.format("Filling in test case: '%s'", testCase));
-        new Input("Title").write(testCase.getTitle());
+        new InputTitle("Title").write(testCase.getTitle());
         new Input("Description").write(testCase.getDescription());
         new Select("Status").select(testCase.getStatus());
         new Select("Suite").select(testCase.getSuite());
@@ -86,7 +87,7 @@ public class RepositoryPage extends BasePage {
 
     public RepositoryPage clearInputFields() {
         log.info("Clearing input fields");
-        new Input("Title").clear();
+        new InputTitle("Title").clear();
         new Input("Description").clear();
         new Input("Pre-conditions").clear();
         new Input("Post-conditions").clear();
@@ -103,7 +104,7 @@ public class RepositoryPage extends BasePage {
         log.info("Expected case: " + testCase);
         boolean name = false;
         TestCase actualCase = TestCase.builder()
-                .title(new Input("Title").getText())
+                .title(new InputTitle("Title").getText())
                 .description(new Input("Description").getText())
                 .status(new Select("Status").getText())
                 .suite(new Select("Suite").getText())
@@ -136,7 +137,7 @@ public class RepositoryPage extends BasePage {
 
     public RepositoryPage fillInTestSuite(TestSuite testSuite) {
         log.info(String.format("Filling in test suite: '%s'", testSuite));
-        new Input("Suite name").write(testSuite.getSuiteName());
+        new InputTitle("Suite name").write(testSuite.getSuiteName());
         $(SELECT_SUITES).selectOption(testSuite.getParentSuite());
         actions().moveToElement($x(String.format(SUITE_INPUTS, "Description"))).click().sendKeys(testSuite.getDescription()).perform();
         actions().moveToElement($x(String.format(SUITE_INPUTS, "Preconditions"))).click().sendKeys(testSuite.getPreconditions()).perform();
@@ -159,7 +160,7 @@ public class RepositoryPage extends BasePage {
         log.info("Expected suite: " + testSuite);
         boolean isDetails = false;
         TestSuite actualTestSuite = TestSuite.builder()
-                .suiteName(new Input("Suite name").getText())
+                .suiteName(new InputTitle("Suite name").getText())
                 .parentSuite($(SELECT_OPTION_TO_GET_TEXT).text())
                 .description($x(String.format(SUITE_INPUTS_TO_GET_TEXT, "Description")).text())
                 .preconditions($x(String.format(SUITE_INPUTS_TO_GET_TEXT, "Preconditions")).text())
@@ -186,7 +187,7 @@ public class RepositoryPage extends BasePage {
 
     public RepositoryPage clearSuiteInputFields() {
         log.info("Clearing suite input fields");
-        new Input("Suite name").clear();
+        new InputTitle("Suite name").clear();
         clearWebField($x(String.format(SUITE_INPUTS_TO_GET_TEXT, "Description")));
         clearWebField($x(String.format(SUITE_INPUTS, "Preconditions")));
         return this;
