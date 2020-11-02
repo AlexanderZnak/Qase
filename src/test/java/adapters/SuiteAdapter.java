@@ -1,6 +1,7 @@
 package adapters;
 
 import com.google.gson.GsonBuilder;
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import lombok.extern.log4j.Log4j2;
 import models.api.Result;
@@ -14,6 +15,7 @@ import static org.testng.Assert.assertEquals;
 @Log4j2
 public class SuiteAdapter extends BaseAdapter {
 
+    @Step("Validating response via objects using json at the path: '{pathName}'")
     public SuiteAdapter validateResponseViaObjects(String pathName, Response response) {
         gson = new GsonBuilder()
                 .excludeFieldsWithoutExposeAnnotation()
@@ -31,6 +33,7 @@ public class SuiteAdapter extends BaseAdapter {
         return this;
     }
 
+    @Step("Getting suite id")
     public int getSuiteId(Response response) {
         return response.jsonPath().getInt("result.id");
     }

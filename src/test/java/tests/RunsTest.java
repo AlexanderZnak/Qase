@@ -1,15 +1,18 @@
 package tests;
 
 import com.github.javafaker.Faker;
+import io.qameta.allure.Description;
 import models.TestRun;
 import org.testng.annotations.Test;
 import tests.base.BaseTest;
+import tests.base.Retry;
 
 public class RunsTest extends BaseTest {
     Faker faker = new Faker();
     TestRun testRun;
 
-    @Test
+    @Test(description = "Success CRUD for Test Run", retryAnalyzer = Retry.class)
+    @Description("Validation of correct working to create, edit and delete Test Run")
     public void testRunShouldBeCreatedEditedDeleted() {
         testRun = TestRun.builder()
                 .runTitle(faker.rickAndMorty().character())

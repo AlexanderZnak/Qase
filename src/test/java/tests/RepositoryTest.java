@@ -1,6 +1,7 @@
 package tests;
 
 import com.github.javafaker.Faker;
+import io.qameta.allure.Description;
 import models.TestCase;
 import models.TestSuite;
 import org.testng.annotations.Test;
@@ -12,7 +13,8 @@ public class RepositoryTest extends BaseTest {
     TestCase testCase;
     TestSuite testSuite;
 
-    @Test(retryAnalyzer = Retry.class)
+    @Test(description = "Success CRUD for Test Case", retryAnalyzer = Retry.class)
+    @Description("Validation of correct working to create, edit and delete Test Case")
     public void testCaseShouldBeCreatedEditedDeleted() {
         testCase = TestCase.builder()
                 .title(faker.gameOfThrones().character())
@@ -57,7 +59,8 @@ public class RepositoryTest extends BaseTest {
                 .validateIsTestCaseDeleted("QASE", testCase);
     }
 
-    @Test(retryAnalyzer = Retry.class)
+    @Test(description = "Success CRUD for Test Suite", retryAnalyzer = Retry.class)
+    @Description("Validation of correct working to create, edit and delete Test Suite")
     public void testSuiteShouldBeCreatedEditedDeleted() {
         testSuite = TestSuite.builder()
                 .suiteName(faker.funnyName().name())
