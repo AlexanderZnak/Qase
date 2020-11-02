@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import lombok.extern.log4j.Log4j2;
 
 import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.sleep;
 
 @Log4j2
 public class Input {
@@ -18,6 +19,7 @@ public class Input {
     public void write(String text) {
         log.info(String.format("Writing text: %s into input with label: %s", text, label));
         $x(String.format(hiddenInputLocator, label)).shouldBe(Condition.visible).sendKeys(text);
+        sleep(3000);
     }
 
     public String getText() {
