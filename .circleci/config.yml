@@ -26,7 +26,7 @@ jobs:
           command: google-chrome --version
       - run:
           name: Running tests
-          command: mvn clean install
+          command: mvn clean test -DsuiteXmlFile=src/test/resources/smoke.xml
       - run:
           name: Generate allure report
           command: mvn allure:report
