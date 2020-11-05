@@ -1,33 +1,47 @@
 package tests.api;
 
-import adapters.BaseAdapter;
 import adapters.SuiteAdapter;
-import io.restassured.response.Response;
+import models.TestSuite;
+import models.api.Result;
 import org.testng.annotations.Test;
 
-import java.io.File;
+import static org.testng.Assert.assertEquals;
 
 public class SuiteTest {
-    BaseAdapter baseAdapter = new BaseAdapter();
     SuiteAdapter suiteAdapter = new SuiteAdapter();
 
     @Test
     public void getSpecificTestSuite() {
-        Response response = baseAdapter.doGetRequest("/v1/suite/QASE/21", 200);
-        suiteAdapter.validateResponseViaObjects("src/test/resources/defects.json", response);
+        TestSuite expectedResult = TestSuite.builder()
+                .description("This suite contains cases that belong to the following processes: resolve defect, edit defect, delete defect")
+                .preconditions(null)
+                .suiteName("Defects")
+                .casesCount(3)
+                .parentId(15)
+                .build();
+
+        Result result = suiteAdapter
+                .get("QASE", 21);
+        assertEquals(result.getResult(), expectedResult);
     }
 
     @Test
     public void testSuiteShouldBeCreatedEditedDeleted() {
-        Response response = baseAdapter.doPostRequestWithBody(new File("src/test/resources/new-suite.json"), "/v1/suite/QASE", 200);
-        baseAdapter.validateResponseViaJsonPath("status");
-        int id = suiteAdapter.getSuiteId(response);
-        baseAdapter
-                .doPatchRequest(new File("src/test/resources/update-suite.json"), "/v1/suite/QASE/" + id, 200)
-                .validateResponseViaJsonPath("status");
-        baseAdapter
-                .doDeleteRequest("/v1/suite/QASE/" + id, 200)
-                .validateResponseViaJsonPath("status");
+        TestSuite suite = TestSuite.builder()
+                .description("Suite should be updated")
+                .preconditions("do correct api request")
+                .suiteName("API test suite")
+                .build();
+
+        int id  = suiteAdapter.post("QASE", suite);
+
+        suite.setSuiteName("Updated suite");
+        suite.setDescription("Suite should be updated");
+
+        suiteAdapter
+                .patch("QASE", id, suite);
+        suiteAdapter
+                .delete("QASE", id);
     }
 
 }
