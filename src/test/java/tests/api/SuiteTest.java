@@ -17,7 +17,7 @@ public class SuiteTest {
                 .preconditions(null)
                 .suiteName("Defects")
                 .casesCount(3)
-                .parentId(15)
+                .parentId(1)
                 .build();
 
         Result result = suiteAdapter
