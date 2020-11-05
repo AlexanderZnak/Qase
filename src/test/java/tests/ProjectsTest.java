@@ -1,6 +1,7 @@
 package tests;
 
 import com.github.javafaker.Faker;
+import io.qameta.allure.Description;
 import models.TestProject;
 import org.testng.annotations.Test;
 import tests.base.BaseTest;
@@ -10,7 +11,8 @@ public class ProjectsTest extends BaseTest {
     TestProject testProject;
     Faker faker = new Faker();
 
-    @Test(retryAnalyzer = Retry.class)
+    @Test(description = "Success CRUD for Test Project", retryAnalyzer = Retry.class)
+    @Description("Validation of correct working to create, edit and delete Test Project")
     public void testProjectShouldBeCreatedEditedDeleted() {
         loginSteps
                 .logIn(EMAIL, PASSWORD);

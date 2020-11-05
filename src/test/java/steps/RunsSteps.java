@@ -3,6 +3,7 @@ package steps;
 import elements.Input;
 import elements.InputTitle;
 import elements.Select;
+import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import models.TestRun;
 import pages.RunsPage;
@@ -17,6 +18,7 @@ public class RunsSteps {
         runsPage = new RunsPage();
     }
 
+    @Step("Creating test run: '{testRun}'")
     public RunsSteps createTestRun(TestRun testRun) {
         log.info(String.format("Creating test run: '%s'", testRun));
         runsPage
@@ -28,6 +30,7 @@ public class RunsSteps {
         return this;
     }
 
+    @Step("Validating is Test run: '{testRun}' exists")
     public RunsSteps validateIsTestRunCreated(TestRun testRun) {
         log.info(String.format("Validating is Test run: '%s' exists", testRun));
         boolean isExist = runsPage
@@ -37,6 +40,7 @@ public class RunsSteps {
         return this;
     }
 
+    @Step("Validating details of expected test run: '{expectedTestRun}'")
     public RunsSteps validateDetailsOfCreatedTestRun(TestRun expectedTestRun) {
         log.info(String.format("Validating details of expected test run: %s", expectedTestRun));
         expectedTestRun.setPlan("");
@@ -57,6 +61,7 @@ public class RunsSteps {
         return this;
     }
 
+    @Step("Editing test run: '{testRun}'")
     public RunsSteps editTestRun(TestRun testRun) {
         log.info(String.format("Editing test run: '%s'", testRun));
         runsPage
@@ -66,16 +71,19 @@ public class RunsSteps {
         return this;
     }
 
+    @Step("Validating is Test run: '{testRun}' exists")
     public RunsSteps validateIsTestRunEdited(TestRun testRun) {
         validateIsTestRunCreated(testRun);
         return this;
     }
 
+    @Step("Validating details of expected test run: '{testRun}'")
     public RunsSteps validateDetailsOfEditedTestRun(TestRun testRun) {
         validateDetailsOfCreatedTestRun(testRun);
         return this;
     }
 
+    @Step("Deleting test run: '{testRun}'")
     public RunsSteps deleteTestRun(TestRun testRun) {
         log.info(String.format("Deleting test run: '%s'", testRun.getRunTitle()));
         runsPage
@@ -85,6 +93,7 @@ public class RunsSteps {
         return this;
     }
 
+    @Step("Validating is Test run: '{testRun}' doesn't exists")
     public RunsSteps validateIsTestRunDeleted(TestRun testRun) {
         log.info(String.format("Validating is Test run: '%s' doesn't exists", testRun.getRunTitle()));
         boolean isExist = runsPage

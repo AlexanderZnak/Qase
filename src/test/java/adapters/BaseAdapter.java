@@ -1,6 +1,7 @@
 package adapters;
 
 import com.google.gson.Gson;
+import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.parsing.Parser;
@@ -18,6 +19,7 @@ public class BaseAdapter {
     Response response;
     Gson gson;
 
+    @Step("Doing the get request to: '{request}', validating status code: '{statusCode}'")
     public Response doGetRequest(String request, int statusCode) {
         RestAssured.defaultParser = Parser.JSON;
 
@@ -30,6 +32,7 @@ public class BaseAdapter {
         return response;
     }
 
+    @Step("Doing the delete request to: '{request}', validating status code: '{statusCode}'")
     public BaseAdapter doDeleteRequest(String request, int statusCode) {
         RestAssured.defaultParser = Parser.JSON;
 
@@ -42,6 +45,7 @@ public class BaseAdapter {
         return this;
     }
 
+    @Step("Doing the post request to: '{request}', sending the body: '{file}', validating status code: '{statusCode}'")
     public Response doPostRequestWithBody(File file, String request, int statusCode) {
         RestAssured.defaultParser = Parser.JSON;
 
@@ -55,6 +59,7 @@ public class BaseAdapter {
         return response;
     }
 
+    @Step("Doing the patch request to: '{request}', sending the body: '{file}', validating status code: '{statusCode}'")
     public BaseAdapter doPatchRequest(File file, String request, int statusCode) {
         RestAssured.defaultParser = Parser.JSON;
 
@@ -68,6 +73,7 @@ public class BaseAdapter {
         return this;
     }
 
+    @Step("Validating response via JsonPath: '{jsonPathStatus}'")
     public BaseAdapter validateResponseViaJsonPath(String jsonPathStatus) {
         assertTrue(response.jsonPath().getBoolean(jsonPathStatus));
         return this;

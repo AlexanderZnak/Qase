@@ -61,6 +61,8 @@ public class RepositoryPage extends BasePage {
         log.info(String.format("Filling in test case: '%s'", testCase));
         new InputTitle("Title").write(testCase.getTitle());
         new Input("Description").write(testCase.getDescription());
+        new Input("Pre-conditions").write(testCase.getPreConditions());
+        new Input("Post-conditions").write(testCase.getPostConditions());
         new Select("Status").select(testCase.getStatus());
         new Select("Suite").select(testCase.getSuite());
         new Select("Severity").select(testCase.getSeverity());
@@ -68,8 +70,6 @@ public class RepositoryPage extends BasePage {
         new Select("Type").select(testCase.getType());
         new Select("Milestone").select(testCase.getMilestone());
         new Select("Behavior").select(testCase.getBehavior());
-        new Input("Pre-conditions").write(testCase.getPreConditions());
-        new Input("Post-conditions").write(testCase.getPostConditions());
         new Select("Automation status").select(testCase.getAutomationStatus());
         return this;
     }
