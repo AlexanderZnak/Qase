@@ -11,17 +11,18 @@ import lombok.extern.log4j.Log4j2;
 
 import static io.restassured.RestAssured.given;
 import static org.testng.Assert.assertTrue;
+import static utils.PropertyReader.getProperty;
 
 @Log4j2
 abstract class BaseAdapter {
-    //TODO Вычитывать с помощью PropertyReader https://gist.github.com/dzmitryrak/84773c08e3ecd4ede56897035a62348c
-    private static final String URL = "https://api.qase.io";
+    private static final String URL = getProperty("qase.api");
+
     Gson gson = new GsonBuilder()
             .excludeFieldsWithoutExposeAnnotation()
             .create();
     Response response;
 
-    @Step("Doing the get request to: '{request}', validating status code: '{statusCode}'")
+    @Step("Doing the get request to: '{request}'")
     protected Response get(String request) {
         RestAssured.defaultParser = Parser.JSON;
 
@@ -34,7 +35,7 @@ abstract class BaseAdapter {
         return response;
     }
 
-    @Step("Doing the delete request to: '{request}', validating status code: '{statusCode}'")
+    @Step("Doing the delete request to: '{uri}', validating status code: '{statusCode}'")
     protected Response delete(String uri, int statusCode) {
         RestAssured.defaultParser = Parser.JSON;
 
@@ -47,7 +48,7 @@ abstract class BaseAdapter {
         return response;
     }
 
-    @Step("Doing the post request to: '{request}', sending the body: '{file}', validating status code: '{statusCode}'")
+    @Step("Doing the post request to: '{request}', sending the body: '{body}', validating status code: '{statusCode}'")
     protected Response post(String request, String body, int statusCode) {
         RestAssured.defaultParser = Parser.JSON;
 
@@ -61,7 +62,7 @@ abstract class BaseAdapter {
         return response;
     }
 
-    @Step("Doing the patch request to: '{request}', sending the body: '{file}', validating status code: '{statusCode}'")
+    @Step("Doing the patch request to: '{uri}', sending the body: '{body}', validating status code: '{statusCode}'")
     protected Response patch(String uri, String body, int statusCode) {
         RestAssured.defaultParser = Parser.JSON;
 
@@ -75,7 +76,7 @@ abstract class BaseAdapter {
         return response;
     }
 
-    @Step("Validating response via JsonPath: '{status}'")
+    @Step("Validating response status")
     protected BaseAdapter validateStatus(Response response) {
         assertTrue(response.jsonPath().getBoolean("status"));
         return this;

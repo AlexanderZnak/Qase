@@ -16,13 +16,13 @@ public class SuiteAdapter extends BaseAdapter {
     }
 
     public int post(String projectName, TestSuite suite) {
-        Response response = super.post(String.format("%s/%s", API_PATH, projectName), gson.toJson(suite),200);
+        Response response = super.post(String.format("%s/%s", API_PATH, projectName), gson.toJson(suite), 200);
         validateStatus(response);
         return response.jsonPath().getInt("result.id");
     }
 
     public int patch(String projectName, int suiteId, TestSuite suite) {
-        Response response = super.patch(String.format("%s/%s/%s", API_PATH, projectName, suiteId), gson.toJson(suite),200);
+        Response response = super.patch(String.format("%s/%s/%s", API_PATH, projectName, suiteId), gson.toJson(suite), 200);
         validateStatus(response);
         return response.jsonPath().getInt("result.id");
     }
