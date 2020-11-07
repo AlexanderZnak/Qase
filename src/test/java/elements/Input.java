@@ -7,8 +7,8 @@ import static com.codeborne.selenide.Selenide.$x;
 
 @Log4j2
 public class Input {
-    String hiddenInputLocator = "//*[text()='%s']/parent::div//*[contains(@class, 'empty-node')]";
-    String locatorForGetText = "//*[text()='%s']/parent::div//*[@class= 'ProseMirror']";
+    String hiddenInputLocator = "//*[text()=\"%s\"]/parent::div//*[contains(@class, 'empty-node')]";
+    String locatorForGetText = "//*[text()=\"%s\"]/parent::div//*[@class= 'ProseMirror']";
     String label;
 
     public Input(String label) {
