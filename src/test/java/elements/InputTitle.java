@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Selenide.$x;
 
 @Log4j2
 public class InputTitle {
-    String inputLocator = "//*[text()='%s']/parent::div//input";
+    String inputLocator = "//*[text()=\"%s\"]/parent::div//input";
     String label;
 
     public InputTitle(String label) {
